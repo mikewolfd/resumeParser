@@ -1,0 +1,28 @@
+service: generate-questions
+app: mooosixty
+org: fearless
+
+frameworkVersion: "3"
+
+plugins:
+  - serverless-offline
+provider:
+  name: aws
+  runtime: nodejs18.x
+  stage: dev
+  timeout: 300
+  region: us-east-1
+
+functions:
+  generateQuestions:
+    handler: handler.generateQuestions
+    events:
+      - http:
+          path: generate-questions
+          method: post
+  resumeStandardizer:
+    handler: handler.resumeStandardizer
+    events:
+      - http:
+          path: standardize-resume
+          method: post

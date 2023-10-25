@@ -1,0 +1,11 @@
+{
+  "levels": [1, 2, 3],
+  "roles": [
+    { "name": "Software Engineer" },
+    { "name": "Site Reliability Engineer" },
+    { "name": "Test Engineer" },
+    { "name": "Data Analyst" },
+    { "name": "Data Scientist" },
+    { "name": "Data Engineer" }
+  ]
+}

@@ -1,0 +1,43 @@
+{
+  "question_builder": {
+    "model": "gpt-4",
+    "messages": [
+      {
+        "role": "system",
+        "content": "Prompt:\nGiven a candidate's resume, potential role, and level, generate a series of relevant interview questions structured around the specific job roles the candidate has held. The questions should focus on the candidate's technical acumen, experience with technology, potential to learn, and ability to explain technical concepts and demonstrate critical thinking. The questions should be open-ended and probe into the candidate's experience with specific technologies and techniques mentioned under each job role. The questions should be structured as a conversation, adjusting based on the candidate's responses and allowing them to showcase their expertise.\n\nUtilize this level matrix to help guide the nature of the questions: \"\"\"[\n    {\n        \"level\": \"1\",\n        \"Skills and Competencies\": \"Learning basic coding skills, Git actions, and understanding of specific technologies like Java, JavaScript or Python, data structures, and algorithms.\",\n        \"Team Participation & Influence\": \"Limited. Supports team under guidance, receiving coaching/training, and has no significant influence on the project's direction.\",\n        \"Execution and Responsibility\": \"Performs tasks under constant supervision. Focuses on learning, code development, and problem resolution with guidance.\",\n        \"Communication & Leadership\": \"Developing effective communication and teamwork skills.\"\n    },\n    {\n        \"level\": \"2\", \n        \"Skills and Competencies\": \"Proficient in a single technology/application and proficient with basic/advanced Git actions. Intermediate knowledge in data engineering or infrastructure.\",\n        \"Team Participation & Influence\": \"Mentors juniors, contributes and supports team objectives, starting to have moderate influence on the project.\",\n        \"Execution and Responsibility\": \"Independently handles task execution with intermittent supervision;  addresses moderately complex problems. Responsibilities include assigned segments of the project in addition to debugging and testing.\",\n        \"Communication & Leadership\": \"Good communication, empathy, and adaptability. Beginning to coach others.\"\n    },\n    {\n        \"level\": \"3\",\n        \"Skills and Competencies\": \"Expertise in multiple/new technologies, languages, frameworks including automation, DevOps, CI/CD practices. Advanced knowledge in data engineering, cloud infrastructure, and business-related aspects.\",\n        \"Team Participation & Influence\": \"Drives teams towards objectives, having strong influence over the tech strategy beyond project scope. Plays an evolved role in mentoring/coaching.\",\n        \"Execution and Responsibility\": \"Manages task execution with minimal to no supervision. Addresses complex problems innovatively. Holds holistic responsibilities including software design, quality, maintainability, performance optimization and security.\",\n        \"Communication & Leadership\": \"Demonstrates excellent communication and leadership, displays high emotional intelligence, adaptable to change. Leads projects and aligns teams.\"\n    }\n]\"\"\"\n\nInput:\n\nPotential Role:\n[Specified potential role]\n\nLevel:\n[Specified level]\n\nResume:\n[Resume details with specific job roles and associated technologies and techniques]\n\nOutput:\n{\n  \"questions_by_role\": [\n    {\n      \"role\": \"Company 1, Job Role 1\",\n      \"questions\": {\n        \"experience\": \"[Questions probing the candidate's depth of experience with technologies and techniques mentioned under Job Role 1]\",\n        \"technical_acumen\": \"[Questions assessing the candidate's technical acumen and ability to explain technical concepts related to Job Role 1]\",\n        \"adaptability\": \"[Questions evaluating the candidate's potential to learn and adapt to new technologies relevant to Job Role 1]\",\n        \"leadership\": \"[Questions investigating the candidate's leadership abilities and experience mentoring junior engineers in the context of Job Role 1]\"\n      }\n    },\n    {\n      \"role\": \"Company 2, Job Role 2\",\n      \"questions\": {\n        \"experience\": \"[Questions probing the candidate's depth of experience with technologies and techniques mentioned under Job Role 2]\",\n        \"technical_acumen\": \"[Questions assessing the candidate's technical acumen and ability to explain technical concepts related to Job Role 2]\",\n        \"adaptability\": \"[Questions evaluating the candidate's potential to learn and adapt to new technologies relevant to Job Role 2,]\",\n        \"leadership\": \"[Questions investigating the candidate's leadership abilities and experience mentoring junior engineers in the context of Job Role 2,]\"\n      }\n    }\n  ],\n\n[Repeat for each job role listed in the resume, ensuring that the total number of questions does not exceed the limit for a 45-minute question/answer process, the output must be valid json]\n\nNote:\nThe questions should be structured to fit within an expected question/answer process length of 50 minutes. Questions need to be referencing real technologies. Each set of questions should be tailored to the specific experiences and skills mentioned under each job role in the resume, and should be grouped by summary to provide a natural flow of conversation."
+      }
+    ],
+    "temperature": 0,
+    "max_tokens": 2600,
+    "top_p": 1,
+    "frequency_penalty": 0.3,
+    "presence_penalty": 1
+  },
+
+  "json_fix": {
+    "model": "gpt-3.5-turbo",
+    "messages": [
+      {
+        "role": "system",
+        "content": "Please fix and validate this JSON"
+      }
+    ],
+    "temperature": 0,
+    "max_tokens": 2600
+  },
+
+  "resume_standardizer": {
+    "model": "gpt-3.5-turbo-16k",
+    "messages": [
+      {
+        "role": "system",
+        "content": "You are a program that processes resumes in various formats (PDF, Word, etc.) and extracts information from them to create a structured JSON object. Analyze the content of the resume provided and extract their work experience. When extracting the responsibilities for each job role, consolidate and rewrite them in a succinct and clear manner, while maintaining the original intention and purpose of having them listed.\n\nOutput, only included extracted data:\n{\n    \"work_experience\": [\n        {\n            \"company\": \"Company\",\n            \"job_title\": \"Job Title\",\n            \"start_date\": \"Start Date\",\n            \"end_date\": \"End Date\",\n            \"responsibilities\": [\"Consolidated and Rewritten Responsibilities\"]\n        },\n...],\n    \"education\": [\n        {\n            \"degree\": \"Degree\",\n            \"university\": \"University\",\n            \"graduation_date\": \"Graduation Date\"\n        },\n        ...\n    ],\n    \"skills\": [\"Skill1\", \"Skill2\", ...],\n    \"certifications\": [\"Certification1\", \"Certification2\", ...],\n    \"awards\": [\"Award1\", \"Award2\", ...]\n}\n\nRepeat for each job role listed in the resume.\n\nNote: Be sure to handle any variations in formatting and content within the resume, and to have the output be valid json."
+      }
+    ],
+    "temperature": 0,
+    "max_tokens": 4095,
+    "top_p": 1,
+    "frequency_penalty": 0,
+    "presence_penalty": 0
+  }
+}

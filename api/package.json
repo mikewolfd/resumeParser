@@ -1,0 +1,15 @@
+{
+  "name": "generate-questions",
+  "version": "1.0.0",
+  "description": "",
+  "main": "handler.js",
+  "scripts": {
+    "dev": "serverless offline"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "openai": "^4.0.1",
+    "serverless-offline": "^12.0.4"
+  }
+}
